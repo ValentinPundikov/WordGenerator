@@ -1,10 +1,11 @@
-
 from docxtpl import DocxTemplate
 from num2words import num2words
 import csv
 import random
+from docx2pdf import convert
 
-file_name = "C:/Users/Админ/PycharmProjects/WordGenerator/data.txt"
+
+file_name = "C:/Users/Админ/PycharmProjects/WordGenerator/data1.txt"
 doc = DocxTemplate("C:/Users/Админ/PycharmProjects/WordGenerator/template.docx")
 
 with open(file_name, "r", encoding="utf-8") as file:
@@ -19,6 +20,8 @@ with open(file_name, "r", encoding="utf-8") as file:
             ,"var_name5": row[4], "var_name6": rub_str, "var_name7": kop_str, "var_name8": row[5], "var_name9": row[6]}
         doc.render(context)
         rand = str(random.randint(1,27))
-        filename = str(row[0] + " " + rand + ".docx")
+        filename = str(row[0] + ".docx")
         doc.render(context)
         doc.save(filename)
+        pdf = str(row[0] + ".pdf")
+        convert(filename)
